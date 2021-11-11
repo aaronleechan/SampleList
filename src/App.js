@@ -26,6 +26,21 @@ function App() {
     setLoading(true)
     fakeDelayLoader(delay,loaderResponse)
   }
+  
+  useEffect(()=>{
+    const favoriteCart = window.localStorage.getItem('favorite')
+    if(favoriteCart){
+      const fav = JSON.parse(favoriteCart)
+      console.log({" favoriteCart ": fav}) 
+      setFavorite(fav)
+    }
+  },[])
+
+  useEffect(()=>{
+    window.localStorage.setItem('favorite',JSON.stringify(favorite))
+  },[favorite])
+
+
 
   useEffect(()=>{
     fetchApi(search,getPhotoData)
